@@ -11,5 +11,6 @@ RUN apt-get install -y zlib1g-dev libncurses5-dev libncursesw5-dev libbz2-dev li
 RUN apt-get install -y zlib1g-dev libcurl4 liblz4-tool && pip3 install pysam==0.20.0 tabulate numpy==1.23.4 scipy==1.9.3 py2bit matplotlib==3.6.2 pyBigWig deeptools pandas==1.5.1 && git clone https://github.com/open2c/pairtools.git && cd pairtools && pip3 install -e . && cd /home/bin
 RUN git clone https://github.com/lh3/bwa.git && cd bwa && make -j $(nproc) && cp bwa qualfa2fq.pl xa2multi.pl /usr/local/bin && cd /home/bin
 RUN wget https://github.com/smithlabcode/preseq/releases/download/v3.1.2/preseq-3.1.2.tar.gz && tar xvf preseq-3.1.2.tar.gz && cd preseq-3*/ && ./configure --enable-hts CPPFLAGS='-I /home/ubuntu/samtools-1.16.1/htslib-1.16.1/' LDFLAGS='-L/home/ubuntu/samtools-1.16.1/htslib-1.16.1/' && make -j $(nproc) && make install && cd /home/bin
+RUN git clone https://github.com/dovetail-genomics/Omni-C.git && cp /home/bin/Omni-C/get_qc.py /usr/local/bin/ && chmod +x /usr/local/bin/get_qc.py
 RUN apt-get clean && apt-get purge && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 WORKDIR /home/data

@@ -1,0 +1,13 @@
+FROM ubuntu:20.04
+MAINTAINER Daniel Romero-Guzman
+LABEL software=YAHS
+RUN apt-get update -y && apt-get install -y build-essential wget git
+WORKDIR /usr/local/bin/GIT
+RUN apt-get install -y bedtools
+RUN apt-get install -y zlib1g-dev libncurses5-dev libncursesw5-dev libbz2-dev liblzma-dev && wget https://github.com/samtools/samtools/releases/download/1.16.1/samtools-1.16.1.tar.bz2 && tar xvf samtools-1.16.1.tar.bz2 && cd samtools-1.16.1/ && ./configure && make -j $(nproc) && make install && cd htslib-1.16 && make && make install && export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib"
+WORKDIR /usr/local/bin/GIT
+RUN git clone https://github.com/lh3/bwa.git && cd bwa && make -j $(nproc) && ln -s bwa /usr/local/bin && ln -s qualfa2fq.pl /usr/local/bin && ln -s xa2multi.pl /usr/local/bin
+WORKDIR /usr/local/bin/GIT
+RUN git clone https://github.com/c-zhou/yahs.git && cd yahs && make && ln -s yahs /usr/local/bin && ln -s agp_to_fasta /usr/local/bin && ln -s juicer /usr/local/bin
+RUN apt-get clean && apt-get purge && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+WORKDIR /home

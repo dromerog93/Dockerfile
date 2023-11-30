@@ -1,0 +1,12 @@
+FROM python:3.11-slim
+MAINTAINER Daniel Romero-Guzman
+LABEL software=multiqc
+ENV version=1.14
+ENV DEBIAN_FRONTEND noninteractive
+RUN apt-get update -y && apt-get install -y procps
+WORKDIR /usr/local/bin/
+RUN pip install --quiet --upgrade pip
+RUN pip install --quiet multiqc
+RUN apt-get clean && apt-get purge && rm -rf /var/lib/apt/lists/* /tmp/*
+WORKDIR /home/
+ENTRYPOINT ["multiqc"]

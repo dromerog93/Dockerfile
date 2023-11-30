@@ -1,0 +1,18 @@
+FROM ubuntu:20.04
+MAINTAINER Daniel Romero-Guzman
+LABEL software=HISAT2
+ENV version=2.2.1
+ENV version_samtools=1.16.1
+ENV version_htslib=1.16
+ENV version_bcftools=1.16
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update -y && apt-get install -y build-essential cmake wget
+WORKDIR /usr/local/bin/
+RUN apt-get install -y zlib1g-dev libncurses5-dev libncursesw5-dev libbz2-dev liblzma-dev && wget https://github.com/samtools/samtools/releases/download/${version_samtools}/samtools-${version_samtools}.tar.bz2 && tar xvf samtools-${version_samtools}.tar.bz2 && cd samtools-${version_samtools}/ && ./configure && make -j $(nproc) && make install && cd htslib-${version_htslib} && make && make install && export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib"
+WORKDIR /usr/local/bin/
+RUN apt-get install -y libcurl4-gnutls-dev && wget https://github.com/samtools/bcftools/releases/download/1.16/bcftools-${version_bcftools}.tar.bz2 && tar xvf bcftools-${version_bcftools}.tar.bz2 && cd bcftools-${version_bcftools}/ && make -j $(nproc) && make install
+WORKDIR /usr/local/bin/
+RUN apt-get install -y python3 && ln -s /usr/bin/python3 /usr/bin/python
+RUN wget https://github.com/DaehwanKimLab/hisat2/archive/refs/tags/v${version}.tar.gz && tar xf v${version}.tar.gz && cd hisat2-${version} && make -j $(nproc) && ln -s /usr/local/bin/hisat2-${version}/hisat2 /usr/local/bin/hisat2 && ln -s /usr/local/bin/hisat2-${version}/hisat2-build /usr/local/bin/hisat2-build && ln -s /usr/local/bin/hisat2-${version}/hisat2-inspect /usr/local/bin/hisat2-inspect && ln -s /usr/local/bin/hisat2-${version}/hisat2-repeat /usr/local/bin/hisat2-repeat && cp hisat2*py /usr/local/bin
+RUN apt-get clean && apt-get purge && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+WORKDIR /home/

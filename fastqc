@@ -1,0 +1,13 @@
+FROM ubuntu:20.04
+MAINTAINER Daniel Romero-Guzman
+LABEL software=FastQC
+ENV version=0.11.9
+RUN export DEBIAN_FRONTEND=noninteractive && apt-get update -y && apt-get install -y build-essential wget unzip
+WORKDIR /usr/local/bin
+RUN export DEBIAN_FRONTEND=noninteractive && apt-get install -y default-jre
+RUN wget https://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v${version}.zip && unzip fastqc_v${version}.zip && rm fastqc_v${version}.zip
+RUN chmod 755 /usr/local/bin/FastQC/fastqc
+RUN ln -s /usr/local/bin/FastQC/fastqc /usr/local/bin/fastqc
+RUN apt-get clean && apt-get purge && rm -rf /var/lib/apt/lists/* /tmp/*
+WORKDIR /home/
+ENTRYPOINT ["fastqc"]

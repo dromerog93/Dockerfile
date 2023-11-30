@@ -1,0 +1,18 @@
+FROM ubuntu:20.04
+MAINTAINER Daniel Romero-Guzman
+LABEL software=Salsa2
+ENV DEBIAN_FRONTEND=noninteractive
+WORKDIR /usr/local/bin/
+RUN apt-get update -y && apt-get install -y build-essential cmake git wget
+WORKDIR /usr/local/bin/
+RUN apt-get install -y bedtools
+WORKDIR /usr/local/bin/
+RUN apt-get install -y zlib1g-dev libncurses5-dev libncursesw5-dev libbz2-dev liblzma-dev && wget https://github.com/samtools/samtools/releases/download/1.16.1/samtools-1.16.1.tar.bz2 && tar xvf samtools-1.16.1.tar.bz2 && cd samtools-1.16.1/ && ./configure && make -j $(nproc) && make install && cd htslib-1.16 && make && make install && export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:/usr/local/lib"
+WORKDIR /usr/local/bin/
+RUN git clone https://github.com/lh3/bwa.git && mv bwa bwa_git && cd bwa_git && make -j $(nproc) && cp bwa qualfa2fq.pl xa2multi.pl /usr/local/bin
+WORKDIR /usr/local/bin/
+RUN apt-get install -y --no-install-recommends python2 libboost-graph-dev && wget https://bootstrap.pypa.io/pip/2.7/get-pip.py && python2 get-pip.py && python2 -m pip install setuptools wheel numpy networkx==1.1 && python2 -m pip cache purge
+WORKDIR /usr/local/bin/
+RUN git clone https://github.com/marbl/SALSA.git && cd SALSA && make && ln -s /usr/local/bin/SALSA/run_pipeline.py /usr/local/bin/salsa2
+RUN apt-get clean && apt-get purge && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+WORKDIR /home/

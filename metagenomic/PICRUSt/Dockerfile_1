@@ -1,0 +1,14 @@
+FROM ubuntu:20.04
+MAINTAINER Daniel Romero-Guzman
+LABEL software=PICRUSt
+ENV version=1.1.4
+ENV DEBIAN_FRONTEND noninteractive
+RUN apt-get update -y && apt-get install -y build-essential wget
+WORKDIR /usr/local/bin/
+RUN apt-get install -y python2.7-dev && wget https://bootstrap.pypa.io/pip/2.7/get-pip.py && python2.7 get-pip.py && pip2.7 install h5py==2.7.1
+RUN apt-get install -y libxml2-dev libglpk-dev
+RUN apt-get install -y r-base && R -e "install.packages('ape',dependencies=TRUE, repos='http://cran.rstudio.com/')"
+RUN wget https://github.com/picrust/picrust/archive/master.zip && unzip master.zip && rm master.zip
+RUN cd picrust-master && pip2.7 install .
+RUN apt-get clean && apt-get purge && rm -rf /var/lib/apt/lists/* /tmp/*
+WORKDIR /home/

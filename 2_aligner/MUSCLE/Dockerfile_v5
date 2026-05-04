@@ -1,0 +1,25 @@
+FROM ubuntu:22.04
+
+LABEL maintainer="Daniel Romero-Guzmán <danirg9993@gmail.com>"
+LABEL version="5.3"
+LABEL description="MUSCLE - High-accuracy multiple sequence aligner for protein and nucleotide sequences"
+LABEL source="https://drive5.com/muscle5/manual/"
+LABEL bioinfo.category="aligners"
+LABEL bioinfo.subcategory="msa"
+
+ENV MUSCLE_VERSION=5.3
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends curl ca-certificates && \
+    curl -L https://github.com/rcedgar/muscle/releases/download/v${MUSCLE_VERSION}/muscle-linux-x86.v${MUSCLE_VERSION} -o /usr/local/bin/muscle && \
+    chmod +x /usr/local/bin/muscle && \
+    apt-get purge -y curl ca-certificates && \
+    apt-get autoremove -y && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /root/.cache
+
+WORKDIR /data
+
+ENTRYPOINT ["muscle"]
+

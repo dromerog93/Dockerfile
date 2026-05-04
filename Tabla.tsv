@@ -1,0 +1,63 @@
+Tool	Category	Subcategory	Version	Base Image	Description	Entry point	Documentation
+fastq-join	preprocessing	read-merging	1.3.1	ubuntu:22.04	fastq-join - Joining paired-end reads with overlaps.	fastq-join	https://github.com/brwnj/fastq-join
+RiboDetector	preprocessing	rRNA-filtering	0.3.1	python:3.8-slim	RiboDetector (CPU-Mode) - Tool to detect and remove rRNA reads from metatranscriptomic data.	ribodetector_cpu	https://github.com/hzi-bifo/RiboDetector
+PandaSeq	preprocessing	read-merging	2.11	ubuntu:22.04	PandaSeq - Tool for merging paired-end Illumina reads	pandaseq	https://github.com/neufeld/pandaseq
+fastp	preprocessing	trimming	0.24.0	ubuntu:22.04	Fastp - All-in-one FASTQ preprocessor for quality control and trimming.	fastp	https://github.com/OpenGene/fastp
+SortMeRNA	preprocessing	rRNA-filtering	4.3.7	ubuntu:22.04	SortMeRNA - rRNA filtering tool for metatranscriptomics and RNA-seq	sortmerna	https://github.com/biocore/sortmerna
+cutadapt	preprocessing	trimming	5.0	python:3.11-slim	cutadapt - Adapter trimming tool for FASTQ files	cutadapt	https://cutadapt.readthedocs.io
+trimmomatic	preprocessing	trimming	0.39	openjdk:11-jre-slim	Trimmomatic - Flexible read trimming tool for Illumina NGS data.	java  -jar  /opt/trimmomatic.jar	http://www.usadellab.org/cms/?page=trimmomatic
+Mosaik	aligners	short-read	2.2.30	ubuntu:22.04	Mosaik - Sensitive and accurate aligner for both short and long reads	CMD: MosaikAligner	https://github.com/wanpinglee/MOSAIK
+BBMap	aligners	short-read	39.23	openjdk:11-jre-slim	BBMap - Ultra-fast, tolerant read aligner for short and long reads	bbmap	https://sourceforge.net/projects/bbmap/
+MMseqs2	aligners	general	17-b804f	ubuntu:22.04	MMseqs2 - Fast and sensitive protein sequence search and clustering suite	mmseqs	https://github.com/soedinglab/MMseqs2
+minimap2	aligners	long-read	2.29	ubuntu:22.04	Minimap2 - Versatile fast aligner for long DNA or RNA reads	minimap2	https://github.com/lh3/minimap2
+BWA	aligners	short-read	0.7.19	ubuntu:22.04	BWA - Burrows-Wheeler Aligner for short read alignment	bwa	https://github.com/lh3/bwa
+HISAT2	aligners	rna-aligner	HISAT2_2.2.1_samtools_1.21_bcftools_1.21	ubuntu:22.04	HISAT2 + samtools + bcftools - RNA-Seq aligner with variant calling utilities	bash	https://github.com/DaehwanKimLab/hisat2, https://github.com/samtools/samtools, https://github.com/samtools/bcftools
+HISAT2	aligners	rna-aligner	2.2.1	ubuntu:22.04	HISAT2 - Fast and sensitive spliced aligner for RNA-Seq data	CMD: hisat2	https://github.com/DaehwanKimLab/hisat2
+STAR	aligners	rna-aligner	STAR_2.7.11b_samtools_1.21_bcftools_1.21	ubuntu:22.04	STAR + samtools + bcftools - RNA-Seq aligner with variant calling utilities	bash	https://github.com/alexdobin/STAR, https://github.com/samtools/samtools, https://github.com/samtools/bcftools
+STAR	aligners	rna-aligner	2.7.11b	ubuntu:22.04	STAR - Ultrafast spliced aligner for RNA-Seq data	STAR	https://github.com/alexdobin/STAR
+MAFFT	aligners	msa	7.525	ubuntu:22.04	MAFFT - Multiple sequence alignment program based on fast Fourier transform	CMD: mafft	https://mafft.cbrc.jp/alignment/software/
+MAFFT	aligners	msa	7.525	ubuntu:22.04	MAFFT - Multiple sequence alignment program based on fast Fourier transform	mafft	https://mafft.cbrc.jp/alignment/software/
+GMAP_GSNAP	aligners	long-read	2025-04-18	ubuntu:22.04	GMAP - Genomic Mapping and Alignment Program for RNA-Seq long reads	CMD: gmap	http://research-pub.gene.com/gmap/
+BLAST+	aligners	general	2.16.0	ubuntu:22.04	NCBI BLAST+ - Toolkit for nucleotide and protein sequence alignments	CMD: blastn	https://blast.ncbi.nlm.nih.gov/Blast.cgi
+MUSCLE	aligners	msa	3.8.1551	ubuntu:22.04	MUSCLE - High-accuracy multiple sequence aligner for protein and nucleotide sequences	muscle	https://github.com/rcedgar/muscle
+MUSCLE	aligners	msa	5.3	ubuntu:22.04	MUSCLE - High-accuracy multiple sequence aligner for protein and nucleotide sequences	muscle	https://drive5.com/muscle5/manual/
+Bowtie2	aligners	short-read	2.5.4	ubuntu:22.04	Bowtie2 - Fast and sensitive gapped read aligner for short reads (Burrows-Wheeler Aligner)	CMD: bowtie2	https://github.com/BenLangmead/bowtie2
+DIAMOND	aligners	general	2.1.11	ubuntu:22.04	DIAMOND - Fast protein aligner for high-throughput sequencing data	diamond	https://github.com/bbuchfink/diamond
+BWA-MEM2	aligners	short-read	2.2.1	ubuntu:22.04	BWA-MEM2 - Fast reimplementation of BWA-MEM for short read alignment	bwa-mem2	https://github.com/bwa-mem2/bwa-mem2
+clustalo	aligners	msa	1.2.4	ubuntu:22.04	Clustal Omega - Fast and scalable multiple sequence alignment tool	clustalo	https://www.ebi.ac.uk/Tools/msa/clustalo/
+FreeBayes	variant-calling	variant-calling	1.3.6	ubuntu:22.04	FreeBayes - Bayesian genetic variant detector for polymorphisms and complex events	CMD: freebayes	https://github.com/freebayes/freebayes
+bcftools	variant-calling	variant-calling	1.21	ubuntu:22.04	BCFtools - Variant analysis tool in VCF/BCF format	bcftools	https://github.com/samtools/bcftools
+GATK	variant-calling	variant-calling	4.6.2.0	openjdk:17-slim	GATK - Toolkit for variant analysis developed by the Broad Institute	gatk	https://github.com/broadinstitute/gatk
+HTSeq-count	differential-expression	quantification	2.0.9	python:3.11-slim	HTSeq-count - Python framework to count reads per gene from BAM/SAM files	htseq-count	https://htseq.readthedocs.io/en/master/
+salmon	differential-expression	pseudoaligner	1.10.3	ubuntu:22.04	Salmon - Accurate transcript-level quantification from RNA-seq data	salmon	https://github.com/COMBINE-lab/salmon
+R-analysis	diff-expression	differential-analysis	4.5.0	rocker/r-ver:4.5.0	DESeq2, edgeR and limma - Differential expression analysis tools in R (Bioconductor)	CMD: Rscript	https://bioconductor.org/packages/3.21/, https://bioconductor.org/packages/release/bioc/html/DESeq2.html, https://bioconductor.org/packages/release/bioc/html/edgeR.html, https://www.bioconductor.org/packages/release/bioc/html/limma.html
+kallisto	differential-expression	pseudoaligner	0.51.1	ubuntu:22.04	kallisto - Pseudoalignment for RNA-seq quantification	kallisto	https://pachterlab.github.io/kallisto
+featureCounts	differential-expression	quantification	2.1.1	ubuntu:22.04	featureCounts - Read quantification tool from the Subread package	featureCounts	https://subread.sourceforge.net
+NextDenovo	assembly	long-read	2.5.2	python:3.11-slim	NextDenovo - De novo assembler optimized for long noisy reads	nextDenovo	https://github.com/Nextomics/NextDenovo
+MEGAHIT	assembly	metagenome	1.2.9	ubuntu:22.04	MEGAHIT - Ultra-fast and memory-efficient assembler for NGS short reads	megahit	https://github.com/voutcn/megahit
+TACO	assembly	transcriptome-merge	0.7.3	python:3.11-slim	TACO - Transcriptome Aggregation and Construction (multi-sample transcriptome assembler)	taco_run	https://github.com/tacorna/taco
+Scallop	assembly	transcriptome	0.10.5	ubuntu:22.04	Scallop - Reference-based transcript assembler using RNA-seq alignments	scallop	https://github.com/Kingsford-Group/scallop
+Flye	assembly	long-read	2.9.6	python:3.11-slim	Flye - Fast and accurate de novo assembler for long noisy reads	flye	https://github.com/mikolmogorov/Flye
+Pilon	assembly	polishing	1.24	openjdk:11-jre-slim	Pilon - Assembly polishing tool using short reads (Illumina)	java  -jar  /opt/pilon.jar	https://github.com/broadinstitute/pilon
+NextPolish	assembly	polishing	1.4.1	python:3.11-slim	NextPolish - Genome polishing tool for hybrid or long/short reads	nextPolish	https://github.com/Nextomics/NextPolish
+ABySS	assembly	short-read	2.3.10	ubuntu:22.04	ABySS - A de novo, parallel, paired-end sequence assembler for short reads	abyss-pe	https://github.com/bcgsc/abyss
+Redbean	assembly	long-read	2.5	ubuntu:22.04	Redbean (wtdbg2) - Fast de novo assembler for long noisy reads	CMD: wtdbg2	https://github.com/ruanjue/wtdbg2
+Canu	assembly	long-read	2.3	ubuntu:22.04	Canu 2.3 - Long-read assembler for PacBio and Oxford Nanopore reads	canu	https://github.com/marbl/canu
+PolyPolish	assembly	polishing	0.6.0	rust:1.87.0-slim	Polypolish - Illumina-based assembly polisher written in Rust	polypolish	https://github.com/rrwick/Polypolish
+Unicycler	assembly	hybrid	0.5.1	ubuntu:22.04	Unicycler - Hybrid assembler with SPAdes, Racon and BLAST+	unicycler	https://github.com/rrwick/Unicycler
+StringTie	assembly	transcriptome	3.0.0	ubuntu:22.04	StringTie - Fast and highly efficient assembler of RNA-Seq alignments into potential transcripts	stringtie	https://github.com/gpertea/stringtie
+Minia	assembly	short-read	3.2.6	ubuntu:22.04	Minia - Memory-efficient short-read genome assembler based on Bloom filters	minia	https://github.com/GATB/minia
+SPAdes	assembly	short-read	4.2.0	ubuntu:22.04	SPAdes - Genome assembler for single-cell, standard and metagenomic NGS data	spades.py	https://github.com/ablab/spades
+Trinity	assembly	transcriptome	2.15.2	ubuntu:22.04	Trinity - De novo and genome-guided RNA-Seq transcriptome assembler	Trinity	https://github.com/trinityrnaseq/trinityrnaseq
+HyPo	assembly	polishing	1.0.3	ubuntu:22.04	HyPo - Fast and accurate genome polishing tool using long and/or short reads	hypo	https://github.com/kensung-lab/hypo
+Racon	assembly	polishing	1.5.0	ubuntu:22.04	Racon - Consensus module for raw de novo genome assembly of long uncorrected reads	racon	https://github.com/lbcb-sci/racon
+trans-ABySS	assembly	transcriptome	2.0.1	dromero93/abyss:latest	Trans-ABySS - De novo transcriptome assembler pipeline based on ABySS	transabyss	https://github.com/bcgsc/transabyss
+MaSuRCA	assembly	hybrid	4.1.3	ubuntu:22.04	MaSuRCA - Hybrid genome assembler combining Illumina and long reads	CMD: bash	https://github.com/alekseyzimin/masurca
+Raven	assembly	long-read	1.8.3	ubuntu:22.04	Raven - Fast and memory-efficient assembler for long error-prone reads	raven	https://github.com/lbcb-sci/raven
+Medaka	assembly	polishing	2.1.0	python:3.11-slim	Medaka - Neural network polishing for Oxford Nanopore assemblies	medaka_consensus	https://github.com/nanoporetech/medaka
+Hifiasm	assembly	long-read	0.25.0	ubuntu:22.04	Hifiasm - Fast haplotype-resolved de novo assembler for PacBio HiFi reads	hifiasm	https://github.com/chhylp123/hifiasm
+samtools	aligners	rna-aligner	1.21	ubuntu:22.04	Samtools - Toolkit for manipulation of SAM/BAM/CRAM files	samtools	https://github.com/samtools/samtools
+MultiQC	quality-assessment	fastq	1.28	python:3.11-slim	MultiQC - Aggregate quality control reports across bioinformatics tools	multiqc	https://multiqc.info
+RSeQC	quality-assessment	expression	5.0.1	python:3.11-slim	RSeQC - RNA-seq quality control toolkit for alignment-based QC metrics	CMD: bash	https://rseqc.sourceforge.net/
+Qualimap	quality-assessment	alignment	2.3	openjdk:11-jre-slim	Qualimap - Quality control tool for alignment files (BAM/SAM)	qualimap	http://qualimap.conesalab.org/
+FastQC	quality-assessment	fastq	0.12.1	openjdk:11-jre-slim	FASTQC - Quality control tool for FASTQ files	fastqc	https://www.bioinformatics.babraham.ac.uk/projects/fastqc/

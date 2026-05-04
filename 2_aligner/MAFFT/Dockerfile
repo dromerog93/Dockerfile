@@ -1,0 +1,29 @@
+FROM ubuntu:22.04
+
+LABEL maintainer="Daniel Romero-Guzmán <danirg9993@gmail.com>"
+LABEL version="7.525"
+LABEL description="MAFFT - Multiple sequence alignment program based on fast Fourier transform"
+LABEL source="https://mafft.cbrc.jp/alignment/software/"
+LABEL bioinfo.category="aligners"
+LABEL bioinfo.subcategory="msa"
+
+ENV MAFFT_VERSION=7.525
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        curl make g++ ca-certificates && \
+    cd /tmp && \
+    curl -L https://mafft.cbrc.jp/alignment/software/mafft-${MAFFT_VERSION}-without-extensions-src.tgz | tar zx && \
+    cd mafft-${MAFFT_VERSION}-without-extensions/core && \
+    make && \
+    make install && \
+    apt-get purge -y curl make g++ ca-certificates && \
+    apt-get autoremove -y && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /root/.cache
+
+WORKDIR /data
+
+ENTRYPOINT ["mafft"]
+

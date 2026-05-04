@@ -1,0 +1,53 @@
+FROM ubuntu:22.04
+
+LABEL maintainer="Daniel Romero-Guzmán <danirg9993@gmail.com>"
+LABEL version="HISAT2_2.2.1_samtools_1.21_bcftools_1.21"
+LABEL description="HISAT2 + samtools + bcftools - RNA-Seq aligner with variant calling utilities"
+LABEL source="https://github.com/DaehwanKimLab/hisat2, https://github.com/samtools/samtools, https://github.com/samtools/bcftools"
+LABEL bioinfo.category="aligners"
+LABEL bioinfo.subcategory="rna-aligner"
+
+ENV HISAT2_VERSION=2.2.1
+ENV SAMTOOLS_VERSION=1.21
+ENV BCFTOOLS_VERSION=1.21
+ENV HTSLIB_VERSION=1.21
+ENV DEBIAN_FRONTEND=noninteractive
+ENV PATH="/usr/local/bin:$PATH"
+
+RUN apt-get update -y && \
+    apt-get install -y --no-install-recommends \
+        git build-essential ca-certificates \
+        python-is-python3 zlib1g-dev python3-minimal \
+        libbz2-dev liblzma-dev libncurses-dev libcurl4-openssl-dev libssl-dev && \
+    # Install HISAT2
+    git clone --branch v${HISAT2_VERSION} https://github.com/DaehwanKimLab/hisat2.git /tmp/hisat2 && \
+    cd /tmp/hisat2 && \
+    make && \
+    cp hisat2 /usr/local/bin/ && \
+    cp hisat2-* /usr/local/bin/ && \
+    cp hisat2*.py /usr/local/bin/ && \
+    # Install htslib (required for samtools/bcftools)
+    git clone --branch ${HTSLIB_VERSION} https://github.com/samtools/htslib.git /tmp/htslib && \
+    cd /tmp/htslib && \
+    git submodule update --init --recursive && \ 
+    make && \
+    make install && \
+    # Install samtools
+    git clone --branch ${SAMTOOLS_VERSION} https://github.com/samtools/samtools.git /tmp/samtools && \
+    cd /tmp/samtools && \
+    make && \
+    make install && \
+    # Install bcftools
+    git clone --branch ${BCFTOOLS_VERSION} https://github.com/samtools/bcftools.git /tmp/bcftools && \
+    cd /tmp/bcftools && \
+    make && \
+    make install && \
+    # Clean
+    apt-get purge -y git build-essential ca-certificates vim-common && \
+    apt-get autoremove -y && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /root/.cache
+
+WORKDIR /data
+
+ENTRYPOINT ["bash"]

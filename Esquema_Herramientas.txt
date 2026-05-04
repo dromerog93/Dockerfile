@@ -1,0 +1,144 @@
+flowchart LR
+%% Nodes
+    Title("Bioinformática")
+
+%% Categorias
+C0["Demultiplexado"]
+C1["Preprocesamiento"]
+C2["Alineamiento"]
+C3A["Análisis de Variantes"]
+C3B["Expresión Diferencial"]
+
+C4A["Ensamblaje"]
+C4B["Predicción de Genes"]
+C4C["Anotación Funcional"]
+
+C5["Detección de Organismos"]
+C6["Filogenia"]
+
+CXA["Generales"]
+CXB["Análisis de calidad"]
+CXC["Visualización"]
+
+%% Subcategorías
+S001["Illumina"]
+S101["Depurado"]
+S102["Unión de lecturas"]
+S103["Filtrado de ARNr"]
+S201["Lecturas cortas"]
+S202["Transcriptoma"]
+S203["Lecturas largas"]
+S204["Secuencias"]
+S205["Múltiple"]
+S3A01["Búsqueda de variantes"]
+S3B01["Cuantificación"]
+S3B02["Pseudo-alineamiento"]
+S3B03["Análisis estadístico"]
+SXA01["General"]
+SXB01["FASTQ"]
+SXB02["Alineamientos"]
+SXB03["Búsqueda de variantes"]
+SXB04["Expresión diferencial"]
+SXB05["Ensamblajes"]
+
+%% Herramientas
+H001["bcl2fastq"]
+H002["BaseSpace Illumina"]
+H003["BCL-Convert"]
+
+H101["Cutadapt"]
+H102["Trimmomatic"]
+H103["fastp"]
+H104["SortMeRNA"]
+H105["RiboDetector"]
+H106["fastq-join"]
+H107["PandaSeq"]
+
+H201["BWA"]
+H202["BWA-MEM2"]
+H203["Bowtie2"]
+H204["Mosaik"]
+H213["BBMap"]
+H205["HISAT2"]
+H206["STAR"]
+H207["Minimap2"]
+H214["GMAP"]
+H208["BLAST+"]
+H209["Diamond"]
+H210["MMseqs2"]
+H211["MAFFT"]
+H212["Clustal Omega"]
+H215["MUSCLE"]
+
+H3A01["BCFTools"]
+H3A02["GATK"]
+H3A03["FreeBayes"]
+
+H3B01["featureCounts"]
+H3B02["HTSeq-count"]
+H3B03["salmon"]
+H3B04["kallisto"]
+H3B05["DESeq2"]
+H3B06["edgeR"]
+H3B07["limma"]
+
+HXA01["samtools"]
+
+HXB01["FastQC"]
+HXB02["multiQC"]
+HXB03["samtools"]
+HXB04["Qualimap"]
+HXB05["bcftools"]
+HXB06["RSeQC"]
+
+%% Conexiones entre nodos
+Title --> C0 & C1 & C2 & C3A & C3B & CXA & CXB
+C0 --> S001
+S001 --> H001 & H002 & H003
+C1 --> S101 & S102 & S103
+S101 --> H101 & H102 & H103
+S102 --> H103 & H104 & H105
+S103 --> H106 & H107
+C2 --> S201 & S202 & S203 & S204 & S205
+S201 --> H201 & H202 & H203 & H204 & H213
+S202 --> H205 & H206
+S203 --> H207 & H214
+S204 --> H208 & H209 & H210
+S205 --> H211 & H212 & H215
+C3A --> S3A01
+S3A01 --> H3A01 & H3A02 & H3A03
+C3B --> S3B01 & S3B02 & S3B03
+S3B01 --> H3B01 & H3B02
+S3B02 --> H3B03 & H3B04
+S3B03 --> H3B05 & H3B06 & H3B07
+CXA --> SXA01
+SXA01 --> HXA01
+CXB --> SXB01 & SXB02 & SXB03 & SXB04 & SXB05
+SXB01 --> HXB01 & HXB02
+SXB02 --> HXB02 & HXB03 & HXB04 
+SXB03 --> HXB02 & HXB05
+SXB04 --> HXB02 & HXB04 & HXB06
+
+%% Definicion de clases de los nodos
+    class Title purple
+    class C0,C1,C2,C3A,C3B green
+    class C4A,C4B,C4C green
+    class C5,C6 green
+    class CXA,CXB,CXC green
+    class S001,S101,S102,S103 orange
+    class S201,S202,S203,S204,S205 orange
+    class S3A01,S3B01,S3B02,S3B03 orange
+    class SXA01,SXB01,SXB02,SXB03,SXB04,SXB05 orange
+    class H001,H002,H003 blue
+    class H101,H102,H103,H104,H105,H106,H107 blue
+    class H201,H202,H203,H204,H205,H206,H207,H208,H209,H210,H211,H212,H213,H214,H215 blue
+    class H3A01,H3A02,H3A03,H3B01,H3B02,H3B03,H3B04,H3B05,H3B06,H3B07 blue
+    class HXA01,HXB01,HXB02,HXB03,HXB04,HXB05,HXB06 blue
+
+%% Defincion de colores
+    classDef green fill:#B2DFDB,stroke:#00897B,stroke-width:2px
+    classDef orange fill:#FFE0B2,stroke:#FB8C00,stroke-width:2px
+    classDef blue fill:#BBDEFB,stroke:#1976D2,stroke-width:1px
+    classDef yellow fill:#FFF9C4,stroke:#FBC02D,stroke-width:2px
+    classDef pink fill:#F8BBD0,stroke:#C2185B,stroke-width:2px
+    classDef purple fill:#E1BEE7,stroke:#8E24AA,stroke-width:2px
